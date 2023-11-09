@@ -883,7 +883,7 @@ class _MyAppState extends State<MyApp> {
             return Sizer(
               builder: (context, orientation, deviceType) {
                 return MaterialApp.router(
-                  title: 'AIdea',
+                  title: '云数享AI',
                   themeMode: appTheme.mode,
                   theme: createLightThemeData(),
                   darkTheme: createDarkThemeData(),
@@ -904,7 +904,6 @@ class _MyAppState extends State<MyApp> {
 ThemeData createLightThemeData() {
   return ThemeData.light().copyWith(
     extensions: [CustomColors.light],
-    useMaterial3: true,
     appBarTheme: const AppBarTheme(
       // backgroundColor: Color.fromARGB(255, 250, 250, 250),
       backgroundColor: Colors.transparent,
@@ -937,7 +936,6 @@ ThemeData createLightThemeData() {
 ThemeData createDarkThemeData() {
   return ThemeData.dark().copyWith(
     extensions: [CustomColors.dark],
-    useMaterial3: true,
     appBarTheme: const AppBarTheme(
       // backgroundColor: Color.fromARGB(255, 48, 48, 48),
       backgroundColor: Colors.transparent,

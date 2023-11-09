@@ -62,7 +62,7 @@ class _DestroyAccountScreenState extends State<DestroyAccountScreen> {
             children: [
               const MessageBox(
                 message:
-                    '请注意，注销账号后：\n1. 您的数据将被清空，包括数字人、创作岛历史纪录、充值数据、智慧果使用明细等全部数据；\n2. 您未使用完的智慧果将会被销毁，无法继续使用，无法退回；\n3. 注销操作不可逆，一旦账号注销，所有被删除数据均无法恢复。',
+                    '请注意，注销账号后：\n1. 您的数据将被清空，包括智链、创作岛历史纪录、充值数据、智慧果使用明细等全部数据；\n2. 您未使用完的智慧果将会被销毁，无法继续使用，无法退回；\n3. 注销操作不可逆，一旦账号注销，所有被删除数据均无法恢复。',
                 type: MessageBoxType.warning,
               ),
               const SizedBox(height: 15),

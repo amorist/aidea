@@ -21,6 +21,7 @@ func main() {
 	fontRegex := regexp.MustCompile(`https://fonts\.gstatic\.com/(.*?)\.(ttf|otf|woff|woff2)`)
 
 	for _, u := range fontRegex.FindAllString(data, -1) {
+		// fmt.Println(u)
 		savePath := must.Must(download(u))
 		data = strings.ReplaceAll(data, u, "https://resources.aicode.cc/fonts/"+savePath)
 	}

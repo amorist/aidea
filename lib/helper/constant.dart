@@ -9,7 +9,7 @@ const maxRoomNumForNonVIP = 50;
 const coinSign = '个';
 
 // API 服务器地址
-const apiServerURL = 'https://ai-api.aicode.cc';
+const apiServerURL = 'https://ai-api.dgshare.com';
 // const apiServerURL = 'http://localhost';
 
 const settingAPIServerToken = 'api-token';

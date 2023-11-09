@@ -68,7 +68,7 @@ class ChatMessageBloc extends BlocExt<ChatMessageEvent, ChatMessageState> {
           roomId,
           userId: APIServer().localUserID(),
         ),
-        error: '选择的数字人不存在',
+        error: '选择的智链不存在',
       ));
       return;
     }
@@ -128,7 +128,7 @@ class ChatMessageBloc extends BlocExt<ChatMessageEvent, ChatMessageState> {
           roomId,
           userId: APIServer().localUserID(),
         ),
-        error: '选择的数字人不存在',
+        error: '选择的智链不存在',
       ));
       return;
     }
@@ -212,7 +212,7 @@ class ChatMessageBloc extends BlocExt<ChatMessageEvent, ChatMessageState> {
           userId: APIServer().localUserID(),
           chatHistoryId: localChatHistoryId,
         ),
-        error: '选择的数字人不存在',
+        error: '选择的智链不存在',
         chatHistory: localChatHistory,
       ));
       return;

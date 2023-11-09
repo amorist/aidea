@@ -289,7 +289,7 @@ class _ChatRoomCreateScreenState extends State<ChatRoomCreateScreen> {
                 EnhancedInput(
                   padding: const EdgeInsets.only(top: 10, bottom: 5),
                   title: Text(
-                    '数字人头像',
+                    '智链头像',
                     style: TextStyle(
                       color: customColors.textfieldLabelColor,
                       fontSize: 16,

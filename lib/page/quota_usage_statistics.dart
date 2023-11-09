@@ -94,10 +94,10 @@ class _QuotaUsageStatisticsScreenState
   ) {
     final usageGt0 = usages.where((e) => e.used > 0).toList();
     if (usageGt0.isEmpty) {
-      return Center(
+      return const Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
+          children: [
             Icon(
               Icons.error_outline,
               size: 50,

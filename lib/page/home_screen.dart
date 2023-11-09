@@ -185,7 +185,7 @@ class _CharactersScreenState extends State<CharactersScreen> {
       CustomColors customColors, RoomsLoaded state, BuildContext context) {
     if (state.rooms.isEmpty && state.suggests.isEmpty) {
       return Center(
-        // 数字人列表为空
+        // 智链列表为空
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

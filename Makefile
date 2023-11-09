@@ -19,7 +19,7 @@ build-macos:
 	open build/macos/Build/Products/Release/
 
 build-web:
-	flutter build web --web-renderer canvaskit --release --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://resources.aicode.cc/canvaskit/
+	flutter build web --web-renderer canvaskit --tree-shake-icons --release --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://resources.aicode.cc/canvaskit/
 	cd scripts && go run main.go ../build/web/main.dart.js && cd ..
 	rm -fr build/web/fonts/ && mkdir build/web/fonts
 	cp -r scripts/s build/web/fonts/s

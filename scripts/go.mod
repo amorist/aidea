@@ -1,6 +1,6 @@
 module github.com/mylxsw/aidea/scripts
 
-go 1.20
+go 1.19
 
 require (
 	github.com/mylxsw/asteria v1.0.1

@@ -177,7 +177,7 @@ class _ChatRoomSettingScreenState extends State<ChatRoomSettingScreen> {
                                 padding:
                                     const EdgeInsets.only(top: 10, bottom: 5),
                                 title: Text(
-                                  '数字人头像',
+                                  '智链头像',
                                   style: TextStyle(
                                     color: customColors.textfieldLabelColor,
                                     fontSize: 16,

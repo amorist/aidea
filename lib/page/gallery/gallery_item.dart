@@ -287,9 +287,9 @@ class _TextItemState extends State<TextItem> {
                         cancel();
                       },
                       label: const Text(''),
-                      icon: Column(
+                      icon: const Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children: [
                           Icon(
                             Icons.copy,
                             color: Color.fromARGB(255, 255, 255, 255),
@@ -315,9 +315,9 @@ class _TextItemState extends State<TextItem> {
                         });
                       },
                       label: const Text(''),
-                      icon: Column(
+                      icon: const Column(
                         mainAxisSize: MainAxisSize.min,
-                        children: const [
+                        children: [
                           Icon(
                             Icons.translate,
                             color: Color.fromARGB(255, 255, 255, 255),
@@ -394,9 +394,9 @@ class _TextItemState extends State<TextItem> {
                               cancel();
                             },
                             label: const Text(''),
-                            icon: Column(
+                            icon: const Column(
                               mainAxisSize: MainAxisSize.min,
-                              children: const [
+                              children: [
                                 Icon(
                                   Icons.copy,
                                   color: Color.fromARGB(255, 255, 255, 255),

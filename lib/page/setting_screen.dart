@@ -30,7 +30,6 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -125,17 +124,17 @@ class _SettingScreenState extends State<SettingScreen> {
                       },
                     ),
                     // 诊断
-                    SettingsTile(
-                      title: Text(AppLocale.diagnostic.getString(context)),
-                      trailing: Icon(
-                        CupertinoIcons.chevron_forward,
-                        size: MediaQuery.of(context).textScaleFactor * 18,
-                        color: Colors.grey,
-                      ),
-                      onPressed: (context) {
-                        context.push('/diagnosis');
-                      },
-                    ),
+                    // SettingsTile(
+                    //   title: Text(AppLocale.diagnostic.getString(context)),
+                    //   trailing: Icon(
+                    //     CupertinoIcons.chevron_forward,
+                    //     size: MediaQuery.of(context).textScaleFactor * 18,
+                    //     color: Colors.grey,
+                    //   ),
+                    //   onPressed: (context) {
+                    //     context.push('/diagnosis');
+                    //   },
+                    // ),
                     // 检查更新
                     if (!PlatformTool.isIOS())
                       SettingsTile(
@@ -170,53 +169,53 @@ class _SettingScreenState extends State<SettingScreen> {
                         },
                       ),
                     // 用户协议
-                    SettingsTile(
-                      title: Text(AppLocale.userTerms.getString(context)),
-                      trailing: Icon(
-                        CupertinoIcons.chevron_forward,
-                        size: MediaQuery.of(context).textScaleFactor * 18,
-                        color: Colors.grey,
-                      ),
-                      onPressed: (_) {
-                        launchUrl(
-                            Uri.parse('https://ai.aicode.cc/terms-user.html'));
-                      },
-                    ),
+                    // SettingsTile(
+                    //   title: Text(AppLocale.userTerms.getString(context)),
+                    //   trailing: Icon(
+                    //     CupertinoIcons.chevron_forward,
+                    //     size: MediaQuery.of(context).textScaleFactor * 18,
+                    //     color: Colors.grey,
+                    //   ),
+                    //   onPressed: (_) {
+                    //     launchUrl(
+                    //         Uri.parse('https://ai.aicode.cc/terms-user.html'));
+                    //   },
+                    // ),
                     // 隐私政策
-                    SettingsTile(
-                      title: Text(AppLocale.privacyPolicy.getString(context)),
-                      trailing: Icon(
-                        CupertinoIcons.chevron_forward,
-                        size: MediaQuery.of(context).textScaleFactor * 18,
-                        color: Colors.grey,
-                      ),
-                      onPressed: (_) {
-                        launchUrl(Uri.parse(
-                            'https://ai.aicode.cc/privacy-policy.html'));
-                      },
-                    ),
+                    // SettingsTile(
+                    //   title: Text(AppLocale.privacyPolicy.getString(context)),
+                    //   trailing: Icon(
+                    //     CupertinoIcons.chevron_forward,
+                    //     size: MediaQuery.of(context).textScaleFactor * 18,
+                    //     color: Colors.grey,
+                    //   ),
+                    //   onPressed: (_) {
+                    //     launchUrl(Uri.parse(
+                    //         'https://ai.aicode.cc/privacy-policy.html'));
+                    //   },
+                    // ),
 
                     // 关于
-                    SettingsTile(
-                      title: Text(AppLocale.about.getString(context)),
-                      trailing: Icon(
-                        CupertinoIcons.chevron_forward,
-                        size: MediaQuery.of(context).textScaleFactor * 18,
-                        color: Colors.grey,
-                      ),
-                      onPressed: (_) {
-                        showAboutDialog(
-                          context: context,
-                          applicationName: 'AIdea',
-                          applicationIcon:
-                              Image.asset('assets/app.png', width: 40),
-                          applicationVersion: clientVersion,
-                          children: [
-                            Text(AppLocale.aIdeaApp.getString(context)),
-                          ],
-                        );
-                      },
-                    ),
+                    // SettingsTile(
+                    //   title: Text(AppLocale.about.getString(context)),
+                    //   trailing: Icon(
+                    //     CupertinoIcons.chevron_forward,
+                    //     size: MediaQuery.of(context).textScaleFactor * 18,
+                    //     color: Colors.grey,
+                    //   ),
+                    //   onPressed: (_) {
+                    //     showAboutDialog(
+                    //       context: context,
+                    //       applicationName: 'AIdea',
+                    //       applicationIcon:
+                    //           Image.asset('assets/app.png', width: 40),
+                    //       applicationVersion: clientVersion,
+                    //       children: [
+                    //         Text(AppLocale.aIdeaApp.getString(context)),
+                    //       ],
+                    //     );
+                    //   },
+                    // ),
                   ],
                 ),
 
@@ -262,11 +261,11 @@ class _SettingScreenState extends State<SettingScreen> {
                       // ),
 
                       // 自定义服务器
-                      _buildServerSelfHostedSetting(customColors),
+                      // _buildServerSelfHostedSetting(customColors),
                     ],
                   ),
                 // 社交媒体图标
-                _buildSocialIcons(context),
+                // _buildSocialIcons(context),
               ]);
             },
           ),
