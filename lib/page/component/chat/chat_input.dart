@@ -246,9 +246,10 @@ class _ChatInputState extends State<ChatInput> {
                 heightFactor: 0.8,
               );
             },
-            child: Icon(
-              Icons.mic,
-              color: customColors.chatInputPanelText,
+            child: const Icon(
+              Icons.mic_none,
+              // color: customColors.chatInputPanelText,
+              color: Color(0xFF0066FF),
             ),
           )
         : IconButton(
@@ -256,7 +257,7 @@ class _ChatInputState extends State<ChatInput> {
             icon: Icon(
               Icons.send,
               color: _textController.text.trim().isNotEmpty
-                  ? const Color.fromARGB(255, 70, 165, 73)
+                  ? const Color(0xFF0066FF)
                   : null,
             ),
             splashRadius: 20,
