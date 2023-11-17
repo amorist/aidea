@@ -76,7 +76,8 @@ class _SignInScreenState extends State<SignInScreen> {
             if (context.canPop()) {
               context.pop();
             } else {
-              context.go('/chat-chat');
+              // feature-chat
+              context.go('/chat-home');
             }
           },
         ),

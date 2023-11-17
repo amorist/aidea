@@ -12,6 +12,7 @@ import 'package:askaide/page/component/chat/message_state_manager.dart';
 import 'package:askaide/page/component/effect/glass.dart';
 import 'package:askaide/page/component/enhanced_popup_menu.dart';
 import 'package:askaide/page/component/enhanced_textfield.dart';
+import 'package:askaide/page/component/image.dart';
 import 'package:askaide/page/component/random_avatar.dart';
 import 'package:askaide/page/component/share.dart';
 import 'package:askaide/page/theme/custom_size.dart';
@@ -140,7 +141,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   child: BlocBuilder<FreeCountBloc, FreeCountState>(
                     builder: (context, freeState) {
-                      var hintText = '有问题尽管问我';
+                      var hintText = '输入信息';
                       if (freeState is FreeCountLoadedState) {
                         final matched = freeState.model(room.room.model);
                         if (matched != null &&
@@ -322,11 +323,23 @@ class _ChatScreenState extends State<ChatScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // 房间名称
-                      Text(
-                        state.room.name,
-                        style: const TextStyle(fontSize: 16),
+                      SizedBox(
+                        width: 38,
+                        child: ClipRRect(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(19)),
+                          child: CachedNetworkImageEnhanced(
+                            imageUrl: imageURL(
+                                state.room.avatarUrl!, qiniuImageTypeAvatar),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
+                      // 房间名称
+                      // Text(
+                      //   state.room.name,
+                      //   style: const TextStyle(fontSize: 16),
+                      // ),
                       // BlocBuilder<FreeCountBloc, FreeCountState>(
                       //   buildWhen: (previous, current) =>
                       //       current is FreeCountLoadedState,

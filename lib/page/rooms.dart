@@ -31,7 +31,93 @@ class RoomItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(customColors.borderRadius ?? 8),
       ),
-      child: Slidable(
+      child: Material(
+        borderRadius:
+            BorderRadius.all(Radius.circular(customColors.borderRadius ?? 8)),
+        color: customColors.columnBlockBackgroundColor,
+        child: InkWell(
+          borderRadius:
+              BorderRadius.all(Radius.circular(customColors.borderRadius ?? 8)),
+          onTap: () {
+            HapticFeedbackHelper.lightImpact();
+            final chatRoomBloc = context.read<RoomBloc>();
+            context.push('/room/${room.id}/chat').then((value) {
+              chatRoomBloc.add(RoomsLoadEvent());
+            });
+          },
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _buildAvatar(room),
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              room.name,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Text(
+                            humanTime(room.lastActiveTime),
+                            style: TextStyle(
+                              color: customColors.weakLinkColor?.withAlpha(65),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (room.systemPrompt != null &&
+                              room.systemPrompt != '')
+                            Text(
+                              room.systemPrompt!,
+                              style: TextStyle(
+                                color:
+                                    customColors.weakLinkColor?.withAlpha(150),
+                                fontSize: 13,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          // if (room.description != null)
+                          //   Text(
+                          //     room.description!,
+                          //     style:
+                          //         Theme.of(context).textTheme.bodySmall,
+                          //   ),
+                          if (room.systemPrompt == null ||
+                              room.systemPrompt == '')
+                            Text(
+                              room
+                                  .modelName()
+                                  .toUpperCase()
+                                  .replaceAll('-TURBO', ''),
+                              style: TextStyle(
+                                color:
+                                    customColors.weakLinkColor?.withAlpha(150),
+                                fontSize: 13,
+                              ),
+                            ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      /* child: Slidable(
         endActionPane: ActionPane(
           motion: const ScrollMotion(),
           children: [
@@ -163,36 +249,34 @@ class RoomItem extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ), */
     );
   }
 
   Widget _buildAvatar(Room room) {
     if (room.avatarUrl != null && room.avatarUrl!.startsWith('http')) {
       return SizedBox(
-        width: 70,
+        width: 60,
         child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(8),
-            bottomLeft: Radius.circular(8),
-          ),
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
           child: CachedNetworkImageEnhanced(
             imageUrl: imageURL(room.avatarUrl!, qiniuImageTypeAvatar),
             fit: BoxFit.fill,
           ),
         ),
       );
+      // return CircleAvatar(
+      //   backgroundImage:
+      //       NetworkImage(imageURL(room.avatarUrl!, qiniuImageTypeAvatar)),
+      // );
     }
 
     return RandomAvatar(
       id: room.avatar,
-      size: 70,
+      size: 60,
       usage:
           Ability().supportAPIServer() ? AvatarUsage.room : AvatarUsage.legacy,
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(8),
-        bottomLeft: Radius.circular(8),
-      ),
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
     );
   }
 }

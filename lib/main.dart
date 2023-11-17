@@ -74,6 +74,7 @@ import 'package:askaide/bloc/chat_message_bloc.dart';
 import 'package:askaide/bloc/room_bloc.dart';
 import 'package:askaide/bloc/notify_bloc.dart';
 import 'package:askaide/page/chat_room_setting.dart';
+import 'package:askaide/page/chat_home.dart';
 import 'package:askaide/page/chat_screen.dart';
 import 'package:askaide/page/home_screen.dart';
 import 'package:askaide/page/setting_screen.dart';
@@ -258,7 +259,9 @@ class MyApp extends StatefulWidget {
         !stabilityAISelfHosted;
 
     _router = GoRouter(
-      initialLocation: shouldLogin ? '/login' : '/chat-chat',
+      // feature-chat
+      // initialLocation: shouldLogin ? '/login' : '/chat-chat',
+      initialLocation: shouldLogin ? '/login' : '/chat-home',
       observers: [
         BotToastNavigatorObserver(),
       ],
@@ -361,6 +364,7 @@ class MyApp extends StatefulWidget {
                 ),
               ),
             ),
+            // 聊一聊
             GoRoute(
               name: 'chat_chat',
               path: '/chat-chat',
@@ -400,6 +404,16 @@ class MyApp extends StatefulWidget {
                 MultiBlocProvider(
                   providers: [BlocProvider.value(value: chatRoomBloc)],
                   child: CharactersScreen(setting: settingRepo),
+                ),
+              ),
+            ),
+            GoRoute(
+              name: 'chat-home',
+              path: '/chat-home',
+              pageBuilder: (context, state) => transitionResolver(
+                MultiBlocProvider(
+                  providers: [BlocProvider.value(value: chatRoomBloc)],
+                  child: ChatHomeScreen(setting: settingRepo),
                 ),
               ),
             ),
@@ -531,6 +545,7 @@ class MyApp extends StatefulWidget {
                 ),
               ),
             ),
+            // 创作岛
             GoRoute(
               name: 'creative-draw',
               path: '/creative-draw',
@@ -772,6 +787,7 @@ class MyApp extends StatefulWidget {
                 );
               },
             ),
+            // 绘玩
             GoRoute(
               name: 'creative-gallery',
               path: '/creative-gallery',
