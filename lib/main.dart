@@ -407,6 +407,7 @@ class MyApp extends StatefulWidget {
                 ),
               ),
             ),
+            // feature-chat
             GoRoute(
               name: 'chat-home',
               path: '/chat-home',

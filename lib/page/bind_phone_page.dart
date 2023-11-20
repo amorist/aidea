@@ -86,7 +86,9 @@ class _BindPhoneScreenState extends State<BindPhoneScreen> {
         leading: IconButton(
           onPressed: () {
             if (widget.isSignIn) {
-              context.go('/chat-chat?show_initial_dialog=false&reward=0');
+              // context.go('/chat-chat?show_initial_dialog=false&reward=0');
+              // feature-chat
+              context.go('/chat-home');
             } else {
               context.pop();
             }
@@ -291,8 +293,9 @@ class _BindPhoneScreenState extends State<BindPhoneScreen> {
 
       if (widget.isSignIn) {
         if (context.mounted) {
-          context.go(
-              '/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+          // context.go('/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+          // feature-chat
+          context.go('/chat-room');
         }
       } else {
         if (context.mounted) {

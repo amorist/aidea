@@ -163,8 +163,9 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
                 await widget.settings.set(settingAPIServerToken, value.token);
                 await widget.settings.set(settingUserInfo, jsonEncode(value));
                 if (context.mounted) {
-                  context.go(
-                      '/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+                  // context.go('/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+                  // feature-chat
+                  context.go('/chat-room');
                 }
               }).catchError((e) {
                 showErrorMessage(resolveError(context, e));
@@ -404,8 +405,9 @@ class _SigninOrSignupScreenState extends State<SigninOrSignupScreen> {
         return;
       } else {
         if (context.mounted) {
-          context.go(
-              '/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+          // context.go('/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+          // feature-chat
+          context.go('/chat-room');
         }
       }
     }).catchError((e) {

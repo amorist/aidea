@@ -556,8 +556,9 @@ class _SignupScreenState extends State<SignupScreen> {
         return;
       } else {
         if (context.mounted) {
-          context.go(
-              '/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+          // context.go('/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+          // feature-chat
+          context.go('/chat-room');
         }
       }
     }).catchError((e) {

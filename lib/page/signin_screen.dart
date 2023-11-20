@@ -76,8 +76,9 @@ class _SignInScreenState extends State<SignInScreen> {
             if (context.canPop()) {
               context.pop();
             } else {
+              // context.go('/chat-chat');
               // feature-chat
-              context.go('/chat-home');
+              context.go('/chat-room');
             }
           },
         ),
@@ -409,8 +410,9 @@ class _SignInScreenState extends State<SignInScreen> {
             }
             return;
           } else {
-            context.go(
-                '/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+            // context.go('/chat-chat?show_initial_dialog=${value.isNewUser ? "true" : "false"}&reward=${value.reward}');
+            // feature-chat
+            context.go('/chat-room');
           }
         });
       }).catchError((e) {

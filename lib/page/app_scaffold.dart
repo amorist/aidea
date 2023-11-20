@@ -118,7 +118,9 @@ class _AppScaffoldState extends State<AppScaffold> {
     final String location = route.location.split('?').first;
 
     if (location == '/chat-chat') return 0;
-    if (location == '/') return 1;
+    // if (location == '/') return 1;
+    // feature-chat
+    if (location == '/chat-home') return 1;
     if (location == '/creative-gallery') return 2;
     if (location == '/creative-draw') return 3;
     if (location == '/setting') return 4;
@@ -132,7 +134,9 @@ class _AppScaffoldState extends State<AppScaffold> {
       case 0:
         return context.go('/chat-chat');
       case 1:
-        return context.go('/');
+        // return context.go('/');
+        // feature-chat
+        return context.go('/chat-home');
       case 2:
         return context.go('/creative-gallery');
       case 3:
