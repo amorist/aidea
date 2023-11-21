@@ -900,7 +900,7 @@ class _MyAppState extends State<MyApp> {
             return Sizer(
               builder: (context, orientation, deviceType) {
                 return MaterialApp.router(
-                  title: '云数享AI',
+                  title: '下需求',
                   themeMode: appTheme.mode,
                   theme: createLightThemeData(),
                   darkTheme: createDarkThemeData(),

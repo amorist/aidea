@@ -105,7 +105,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   AnimatedTextKit(
                     animatedTexts: [
                       ColorizeAnimatedText(
-                        '云数享',
+                        '下需求',
                         textStyle: const TextStyle(fontSize: 30.0),
                         colors: [
                           Colors.purple,
