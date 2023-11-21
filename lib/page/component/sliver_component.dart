@@ -85,7 +85,6 @@ class SliverComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final customColors = Theme.of(context).extension<CustomColors>()!;
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
@@ -99,7 +98,7 @@ class SliverComponent extends StatelessWidget {
             actions: (actions ?? []).isEmpty
                 ? null
                 : <Widget>[...actions!, const SizedBox(width: 8)],
-            backgroundColor: customColors.backgroundContainerColor,
+            backgroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
               title: title,
               centerTitle: centerTitle,

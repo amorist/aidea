@@ -79,7 +79,7 @@ import 'package:askaide/bloc/room_bloc.dart';
 import 'package:askaide/bloc/notify_bloc.dart';
 import 'package:askaide/page/chat/room_edit.dart';
 import 'package:askaide/page/chat/room_chat.dart';
-import 'package:askaide/page/chat/rooms.dart';
+import 'package:askaide/page/chat/chats.dart';
 import 'package:askaide/page/setting/setting_screen.dart';
 import 'package:askaide/repo/data/chat_message_data.dart';
 import 'package:askaide/repo/chat_message_repo.dart';
@@ -183,10 +183,10 @@ void main() async {
         applePayEnabled: true,
         otherPayEnabled: true,
         translateEnabled: true,
-        mailEnabled: true,
+        mailEnabled: false,
         openaiEnabled: true,
         homeModels: [],
-        homeRoute: '/chat-chat',
+        homeRoute: '/chat',
         showHomeModelDescription: true,
         supportWebsocket: false,
       ),
@@ -422,15 +422,25 @@ class MyApp extends StatefulWidget {
               ),
             ),
             GoRoute(
-              name: 'characters',
-              path: '/',
+              name: 'home-chat',
+              path: '/chat',
               pageBuilder: (context, state) => transitionResolver(
                 MultiBlocProvider(
                   providers: [BlocProvider.value(value: chatRoomBloc)],
-                  child: RoomsPage(setting: settingRepo),
+                  child: ChatsPage(setting: settingRepo),
                 ),
               ),
             ),
+            // GoRoute(
+            //   name: 'characters',
+            //   path: '/',
+            //   pageBuilder: (context, state) => transitionResolver(
+            //     MultiBlocProvider(
+            //       providers: [BlocProvider.value(value: chatRoomBloc)],
+            //       child: RoomsPage(setting: settingRepo),
+            //     ),
+            //   ),
+            // ),
             GoRoute(
               name: 'create-room',
               path: '/create-room',
@@ -925,7 +935,7 @@ class _MyAppState extends State<MyApp> {
             return Sizer(
               builder: (context, orientation, deviceType) {
                 return MaterialApp.router(
-                  title: 'AIdea',
+                  title: 'Brief',
                   themeMode: appTheme.mode,
                   theme: createLightThemeData(),
                   darkTheme: createDarkThemeData(),
@@ -957,7 +967,7 @@ ThemeData createLightThemeData() {
     useMaterial3: true,
     appBarTheme: const AppBarTheme(
       // backgroundColor: Color.fromARGB(255, 250, 250, 250),
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       scrolledUnderElevation: 0,
     ),
     iconButtonTheme: PlatformTool.isMacOS()

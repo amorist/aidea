@@ -1,9 +1,13 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:askaide/helper/ability.dart';
 import 'package:askaide/helper/haptic_feedback.dart';
+import 'package:askaide/helper/model_resolver.dart';
 import 'package:askaide/helper/platform.dart';
 import 'package:askaide/helper/upload.dart';
 import 'package:askaide/lang/lang.dart';
-import 'package:askaide/page/component/chat/voice_record.dart';
+import 'package:askaide/page/component/loading.dart';
 import 'package:askaide/page/component/dialog.dart';
 import 'package:askaide/page/component/theme/custom_size.dart';
 import 'package:askaide/repo/settings_repo.dart';
@@ -16,6 +20,7 @@ import 'package:flutter_localization/flutter_localization.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:askaide/page/component/theme/custom_theme.dart';
+import 'package:record/record.dart';
 
 class ChatInput extends StatefulWidget {
   final Function(String value) onSubmit;
@@ -45,6 +50,14 @@ class ChatInput extends StatefulWidget {
 
 class _ChatInputState extends State<ChatInput> {
   final TextEditingController _textController = TextEditingController();
+
+  bool _isVoice = true;
+
+  void toggleVoiceInput() {
+    setState(() {
+      _isVoice = !_isVoice;
+    });
+  }
 
   /// 用于监听键盘事件，实现回车发送消息，Shift+Enter换行
   late final FocusNode _focusNode = FocusNode(
@@ -85,6 +98,235 @@ class _ChatInputState extends State<ChatInput> {
   void dispose() {
     _textController.dispose();
     super.dispose();
+  }
+
+  // input widget
+  Widget _buildTextInput() {
+    final customColors = Theme.of(context).extension<CustomColors>()!;
+
+    return Expanded(
+      child: Container(
+        height: 50.0, // Set a fixed height
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          // 阴影
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              offset: const Offset(0, 0),
+              blurRadius: 5,
+              spreadRadius: 1,
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                keyboardType: TextInputType.multiline,
+                textInputAction: TextInputAction.newline,
+                maxLines: 5,
+                minLines: 1,
+                maxLength: maxLength,
+                focusNode: _focusNode,
+                controller: _textController,
+                decoration: InputDecoration(
+                  hintText: widget.hintText,
+                  hintStyle: const TextStyle(
+                    fontSize: CustomSize.defaultHintTextSize,
+                  ),
+                  border: InputBorder.none,
+                  counterText: '',
+                ),
+              ),
+            ),
+            // 聊天发送按钮
+            _buildSendOrVoiceButton(context, customColors),
+          ],
+        ),
+      ),
+    );
+  }
+
+  var voiceRecording = false;
+  final record = Record();
+  DateTime? _voiceStartTime;
+  Timer? timer;
+  var millSeconds = 0;
+
+  Widget _buildVoiceInput() {
+    return Expanded(
+      child: GestureDetector(
+        // 上滑取消录音
+        // onVerticalDragUpdate: (details) async {
+        //   if (!voiceRecording) {
+        //     return;
+        //   }
+
+        //   if (details.delta.dy < -50) {
+        //     await onRecordStop();
+        //   }
+        // },
+        onLongPressEnd: (details) async {
+          if (!voiceRecording) {
+            return;
+          }
+
+          setState(() {
+            voiceRecording = false;
+          });
+          await onRecordStop();
+        },
+        onLongPressStart: (details) async {
+          widget.onVoiceRecordTappedEvent?.call();
+          record.hasPermission().then((hasPermission) {
+            if (!hasPermission) {
+              showErrorMessage('请授予录音权限');
+            }
+          });
+
+          if (await record.hasPermission()) {
+            // 震动反馈
+            HapticFeedbackHelper.heavyImpact();
+
+            setState(() {
+              voiceRecording = true;
+              _voiceStartTime = DateTime.now();
+            });
+            // Start recording
+            await record.start(
+              encoder: AudioEncoder.aacLc, // by default
+              bitRate: 128000, // by default
+              samplingRate: 44100, // by default
+            );
+
+            setState(() {
+              millSeconds = 0;
+            });
+            if (timer != null) {
+              timer!.cancel();
+              timer = null;
+            }
+
+            timer = Timer.periodic(const Duration(milliseconds: 100),
+                (timer) async {
+              if (_voiceStartTime == null) {
+                timer.cancel();
+                return;
+              }
+
+              if (DateTime.now().difference(_voiceStartTime!).inSeconds >= 60) {
+                await onRecordStop();
+                return;
+              }
+
+              setState(() {
+                millSeconds =
+                    DateTime.now().difference(_voiceStartTime!).inMilliseconds;
+              });
+            });
+          }
+        },
+        child: Container(
+          height: 50.0, // Set a fixed height
+          decoration: BoxDecoration(
+            color: voiceRecording
+                ? const Color.fromARGB(255, 33, 65, 243)
+                : Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            // 阴影
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                offset: const Offset(0, 0),
+                blurRadius: 5,
+                spreadRadius: 1,
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            children: [
+              Expanded(
+                  child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(), // Add this to push the text and icon to the center and right
+                  voiceRecording
+                      ? LoadingAnimationWidget.staggeredDotsWave(
+                          color: Colors.white,
+                          size: 30,
+                        )
+                      : const Text("按住说话"),
+                  // 点击切换到文本输入
+                  voiceRecording
+                      ? const SizedBox()
+                      : IconButton(
+                          onPressed: toggleVoiceInput,
+                          icon: const Icon(Icons.keyboard),
+                        ),
+                ],
+              )),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future onRecordStop() async {
+    timer?.cancel();
+
+    var resPath = await record.stop();
+    if (resPath == null) {
+      showErrorMessage('语音输入失败');
+      return;
+    }
+
+    final voiceDuration = DateTime.now().difference(_voiceStartTime!).inSeconds;
+    if (voiceDuration < 2) {
+      showErrorMessage('说话时间太短');
+      _voiceStartTime = null;
+      File.fromUri(Uri.parse(resPath)).delete();
+      return;
+    }
+
+    if (voiceDuration > 60) {
+      showErrorMessage('说话时间太长');
+      _voiceStartTime = null;
+      File.fromUri(Uri.parse(resPath)).delete();
+      return;
+    }
+
+    _voiceStartTime = null;
+
+    final cancel = BotToast.showCustomLoading(
+      toastBuilder: (cancel) {
+        return LoadingIndicator(
+          message: AppLocale.processingWait.getString(context),
+        );
+      },
+      allowClick: false,
+      duration: const Duration(seconds: 120),
+    );
+
+    try {
+      final audioFile = File.fromUri(Uri.parse(resPath));
+      final text = await ModelResolver.instance.audioToText(audioFile);
+      _textController.text = text;
+      _handleSubmited(text);
+    } catch (e) {
+      // ignore: use_build_context_synchronously
+      showErrorMessageEnhanced(context, e);
+    } finally {
+      cancel();
+      // 删除临时文件
+      if (!resPath.startsWith('blob:')) {
+        File.fromUri(Uri.parse(resPath)).delete();
+      }
+    }
   }
 
   @override
@@ -151,40 +393,7 @@ class _ChatInputState extends State<ChatInput> {
                       ],
                     ),
                     // 聊天输入框
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: customColors.chatInputAreaBackground,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextFormField(
-                                keyboardType: TextInputType.multiline,
-                                textInputAction: TextInputAction.newline,
-                                maxLines: 5,
-                                minLines: 1,
-                                maxLength: maxLength,
-                                focusNode: _focusNode,
-                                controller: _textController,
-                                decoration: InputDecoration(
-                                  hintText: widget.hintText,
-                                  hintStyle: const TextStyle(
-                                    fontSize: CustomSize.defaultHintTextSize,
-                                  ),
-                                  border: InputBorder.none,
-                                  counterText: '',
-                                ),
-                              ),
-                            ),
-                            // 聊天发送按钮
-                            _buildSendOrVoiceButton(context, customColors),
-                          ],
-                        ),
-                      ),
-                    ),
+                    _isVoice ? _buildVoiceInput() : _buildTextInput(),
                   ],
                 ),
               ),
@@ -210,24 +419,7 @@ class _ChatInputState extends State<ChatInput> {
     return _textController.text == ''
         ? InkWell(
             onTap: () {
-              HapticFeedbackHelper.mediumImpact();
-
-              openModalBottomSheet(
-                context,
-                (context) {
-                  return VoiceRecord(
-                    onFinished: (text) {
-                      _textController.text = text;
-                      Navigator.pop(context);
-                    },
-                    onStart: () {
-                      widget.onVoiceRecordTappedEvent?.call();
-                    },
-                  );
-                },
-                isScrollControlled: false,
-                heightFactor: 0.8,
-              );
+              toggleVoiceInput();
             },
             child: Icon(
               Icons.mic,
@@ -239,7 +431,7 @@ class _ChatInputState extends State<ChatInput> {
             icon: Icon(
               Icons.send,
               color: _textController.text.trim().isNotEmpty
-                  ? const Color.fromARGB(255, 70, 165, 73)
+                  ? const Color.fromRGBO(0, 102, 255, 1)
                   : null,
             ),
             splashRadius: 20,

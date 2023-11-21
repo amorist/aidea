@@ -143,7 +143,7 @@ mixin AppLocale {
   static const String errorLog = 'error-log';
   static const String report = 'report';
   static const String latestVersion = 'latest-version';
-  static const String aIdeaApp = 'aidea-app';
+  static const String aIdeaApp = 'brief-app';
   static const String onceEnabledSmartOptimization =
       'once-enabled-smart-optimization';
   static const String gotIt = 'got-it';

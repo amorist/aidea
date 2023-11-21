@@ -22,7 +22,7 @@ class AppScaffold extends StatefulWidget {
 }
 
 class _AppScaffoldState extends State<AppScaffold> {
-  var _showBottomNavigatorBar = true;
+  var _showBottomNavigatorBar = false;
 
   @override
   void initState() {
@@ -48,39 +48,39 @@ class _AppScaffoldState extends State<AppScaffold> {
   List<BottomNavigationBarConfig> _bottomNavigationBarList(
       {int? currentIndex}) {
     return [
-      if (Ability().enableChat)
+      if (Ability().enableDigitalHuman)
         BottomNavigationBarConfig(
           builder: (index, customColors) => createAnimatedNavBarItem(
             icon: Icons.question_answer_outlined,
             activatedIcon: Icons.question_answer,
             activatedColor: customColors.linkColor,
-            label: AppLocale.chatAnywhere.getString(context),
+            label: "对话",
             activated: currentIndex == index,
           ),
-          route: '/chat-chat',
+          route: '/chat',
         ),
-      if (Ability().enableDigitalHuman)
-        BottomNavigationBarConfig(
-          builder: (index, customColors) => createAnimatedNavBarItem(
-            icon: Icons.group_outlined,
-            activatedIcon: Icons.group,
-            activatedColor: customColors.linkColor,
-            label: AppLocale.homeTitle.getString(context),
-            activated: currentIndex == index,
-          ),
-          route: '/',
-        ),
-      if (Ability().enableGallery)
-        BottomNavigationBarConfig(
-          builder: (index, customColors) => createAnimatedNavBarItem(
-            icon: Icons.auto_awesome_outlined,
-            activatedIcon: Icons.auto_awesome,
-            activatedColor: customColors.linkColor,
-            label: AppLocale.discover.getString(context),
-            activated: currentIndex == index,
-          ),
-          route: '/creative-gallery',
-        ),
+      // if (Ability().enableChat)
+      //   BottomNavigationBarConfig(
+      //     builder: (index, customColors) => createAnimatedNavBarItem(
+      //       icon: Icons.question_answer_outlined,
+      //       activatedIcon: Icons.question_answer,
+      //       activatedColor: customColors.linkColor,
+      //       label: AppLocale.chatAnywhere.getString(context),
+      //       activated: currentIndex == index,
+      //     ),
+      //     route: '/chat-chat',
+      //   ),
+      // if (Ability().enableGallery)
+      //   BottomNavigationBarConfig(
+      //     builder: (index, customColors) => createAnimatedNavBarItem(
+      //       icon: Icons.auto_awesome_outlined,
+      //       activatedIcon: Icons.auto_awesome,
+      //       activatedColor: customColors.linkColor,
+      //       label: AppLocale.discover.getString(context),
+      //       activated: currentIndex == index,
+      //     ),
+      //     route: '/creative-gallery',
+      //   ),
       if (Ability().enableCreationIsland)
         BottomNavigationBarConfig(
           builder: (index, customColors) => createAnimatedNavBarItem(
@@ -111,7 +111,7 @@ class _AppScaffoldState extends State<AppScaffold> {
     final customColors = Theme.of(context).extension<CustomColors>()!;
     final barItems = _bottomNavigationBarList(currentIndex: currentIndex);
     return Scaffold(
-      backgroundColor: customColors.backgroundContainerColor,
+      backgroundColor: Colors.white,
       body: BackgroundContainer(
         setting: widget.settingRepo,
         enabled: true,

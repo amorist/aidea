@@ -95,7 +95,7 @@ class _RoomChatPageState extends State<RoomChatPage> {
       setting: widget.setting,
       child: Scaffold(
         appBar: _buildAppBar(context, customColors),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         body: _buildChatComponents(customColors),
       ),
     );
@@ -140,15 +140,15 @@ class _RoomChatPageState extends State<RoomChatPage> {
                   ),
                   child: BlocBuilder<FreeCountBloc, FreeCountState>(
                     builder: (context, freeState) {
-                      var hintText = '有问题尽管问我';
-                      if (freeState is FreeCountLoadedState) {
-                        final matched = freeState.model(room.room.model);
-                        if (matched != null &&
-                            matched.leftCount > 0 &&
-                            matched.maxCount > 0) {
-                          hintText += '（今日还可免费畅享${matched.leftCount}次）';
-                        }
-                      }
+                      var hintText = '发消息...';
+                      // if (freeState is FreeCountLoadedState) {
+                      //   final matched = freeState.model(room.room.model);
+                      //   if (matched != null &&
+                      //       matched.leftCount > 0 &&
+                      //       matched.maxCount > 0) {
+                      //     hintText += '（今日还可免费畅享${matched.leftCount}次）';
+                      //   }
+                      // }
 
                       return SafeArea(
                         child: _chatPreviewController.selectMode

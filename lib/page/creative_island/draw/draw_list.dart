@@ -59,6 +59,8 @@ class _DrawListScreenState extends State<DrawListScreen> {
     CustomColors customColors,
   ) {
     return SliverComponent(
+      centerTitle: true,
+      titlePadding: const EdgeInsets.only(bottom: 10),
       title: Text(
         AppLocale.creativeIsland.getString(context),
         style: TextStyle(

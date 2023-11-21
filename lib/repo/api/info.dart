@@ -65,7 +65,7 @@ class Capabilities {
       homeModels: ((json['home_models'] ?? []) as List<dynamic>)
           .map((e) => HomeModel.fromJson(e))
           .toList(),
-      homeRoute: json['home_route'] ?? '/chat-chat',
+      homeRoute: '/chat',
       showHomeModelDescription: json['show_home_model_description'] ?? true,
       supportWebsocket: json['support_websocket'] ?? false,
       disableGallery: json['disable_gallery'] ?? false,

@@ -326,14 +326,22 @@ class _ChatPreviewState extends State<ChatPreview> {
                                       state.showMarkdown
                                           ? Markdown(
                                               data: text.trim(),
+                                              textStyle: TextStyle(
+                                                color:
+                                                    message.role == Role.sender
+                                                        ? Colors.white
+                                                        : Colors.black,
+                                              ),
                                               onUrlTap: (value) =>
                                                   launchUrlString(value),
                                             )
                                           : SelectableText(
                                               text,
                                               style: TextStyle(
-                                                color: customColors
-                                                    .chatRoomSenderText,
+                                                color:
+                                                    message.role == Role.sender
+                                                        ? Colors.white
+                                                        : Colors.black,
                                               ),
                                             ),
                                       if (message.quotaConsumed != null &&
@@ -341,7 +349,7 @@ class _ChatPreviewState extends State<ChatPreview> {
                                         Row(
                                           children: [
                                             const Icon(Icons.check_circle,
-                                                size: 12, color: Colors.green),
+                                                size: 12, color: Colors.white),
                                             const SizedBox(width: 5),
                                             Expanded(
                                               child: Text(
@@ -432,7 +440,7 @@ class _ChatPreviewState extends State<ChatPreview> {
                                   Icon(
                                     Icons.check_circle,
                                     size: 12,
-                                    color: Colors.green,
+                                    color: Colors.black,
                                   ),
                                   SizedBox(width: 5),
                                   Text(
