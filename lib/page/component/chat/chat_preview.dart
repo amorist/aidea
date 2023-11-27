@@ -3,7 +3,9 @@ import 'dart:convert';
 
 import 'package:askaide/bloc/chat_message_bloc.dart';
 import 'package:askaide/bloc/room_bloc.dart';
+import 'package:askaide/helper/constant.dart';
 import 'package:askaide/helper/ability.dart';
+import 'package:askaide/helper/image.dart';
 import 'package:askaide/helper/haptic_feedback.dart';
 import 'package:askaide/helper/helper.dart';
 import 'package:askaide/lang/lang.dart';
@@ -25,6 +27,7 @@ import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:askaide/page/component/image_preview.dart';
 
 class ChatPreview extends StatefulWidget {
   final List<MessageWithState> messages;
@@ -344,25 +347,58 @@ class _ChatPreviewState extends State<ChatPreview> {
                                                         : Colors.black,
                                               ),
                                             ),
-                                      if (message.quotaConsumed != null &&
-                                          message.quotaConsumed! > 0)
-                                        Row(
-                                          children: [
-                                            const Icon(Icons.check_circle,
-                                                size: 12, color: Colors.white),
-                                            const SizedBox(width: 5),
-                                            Expanded(
-                                              child: Text(
-                                                '共 ${message.tokenConsumed} 个 Token， 消耗 ${message.quotaConsumed} 个智慧果',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: customColors
-                                                      .weakTextColor,
+                                      // 显示图片
+                                      if (message.image != null &&
+                                          message.image!.isNotEmpty)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10.0),
+                                          child: Row(
+                                            children: [
+                                              const SizedBox(width: 5),
+                                              Expanded(
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0), // 这里的10.0可以根据你的需要调整
+                                                  child: NetworkImagePreviewer(
+                                                    url: message.image!,
+                                                    preview: imageURL(
+                                                        message.image!,
+                                                        qiniuImageTypeThumb),
+                                                    hidePreviewButton: true,
+                                                  ),
+                                                  // child: Image.network(
+                                                  //   message.image!,
+                                                  //   fit: BoxFit.fill,
+                                                  //   // width: 200,
+                                                  //   // height: 200,
+                                                  // ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
+
+                                      // if (message.quotaConsumed != null &&
+                                      //     message.quotaConsumed! > 0)
+                                      //   Row(
+                                      //     children: [
+                                      //       const Icon(Icons.check_circle,
+                                      //           size: 12, color: Colors.white),
+                                      //       const SizedBox(width: 5),
+                                      //       Expanded(
+                                      //         child: Text(
+                                      //           '共 ${message.tokenConsumed} 个 Token， 消耗 ${message.quotaConsumed} 个脑力',
+                                      //           style: TextStyle(
+                                      //             fontSize: 14,
+                                      //             color: customColors
+                                      //                 .weakTextColor,
+                                      //           ),
+                                      //         ),
+                                      //       ),
+                                      //     ],
+                                      //   ),
                                     ],
                                   );
                                 },

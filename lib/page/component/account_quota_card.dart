@@ -75,19 +75,19 @@ class AccountQuotaCard extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    const SizedBox(width: 5),
-                    InkWell(
-                      onTap: () {
-                        launchUrl(
-                          Uri.parse('https://ai.aicode.cc/zhihuiguo.html'),
-                        );
-                      },
-                      child: const Icon(
-                        Icons.help,
-                        size: 16,
-                        color: Color.fromARGB(129, 220, 220, 220),
-                      ),
-                    )
+                    // const SizedBox(width: 5),
+                    // InkWell(
+                    //   onTap: () {
+                    //     launchUrl(
+                    //       Uri.parse('https://ai.aicode.cc/zhihuiguo.html'),
+                    //     );
+                    //   },
+                    //   child: const Icon(
+                    //     Icons.help,
+                    //     size: 16,
+                    //     color: Color.fromARGB(129, 220, 220, 220),
+                    //   ),
+                    // )
                   ],
                 ),
                 const SizedBox(height: 15),

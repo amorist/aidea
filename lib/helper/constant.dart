@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 // 客户端应用版本号
 const clientVersion = '1.0.8';
 // 本地数据库版本号
-const databaseVersion = 25;
+const databaseVersion = 26;
 
 const maxRoomNumForNonVIP = 50;
 const coinSign = '个';
 
-const settingAPIServerToken = 'api-token';
+const settingAPIServerToken = '';
 const settingUserInfo = 'user-info';
 const settingUsingGuestMode = 'using-guest-mode';
 
@@ -37,7 +37,7 @@ const settingDeepAISelfHosted = 'deepai-self-hosted';
 const settingStabilityAISelfHosted = 'stabilityai-self-hosted';
 const settingImageManagerSelfHosted = 'image-manager-self-hosted';
 
-const settingThemeMode = "dark-mode";
+const settingThemeMode = "light";
 const settingImglocToken = 'imgloc-token';
 const chatMessagePerPage = 300;
 const contextBreakKey = 'context-break';

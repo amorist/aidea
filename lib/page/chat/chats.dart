@@ -101,43 +101,46 @@ class _ChatsPageState extends State<ChatsPage> {
                 //     ),
                 // ],
                 centerTitle: true,
-                titlePadding: const EdgeInsets.only(bottom: 10),
-                title: state.suggests.isEmpty
-                    ? Text(
-                        "对话",
-                        style: TextStyle(
-                          fontSize: CustomSize.appBarTitleSize,
-                          color: customColors.backgroundInvertedColor,
+                titlePadding: EdgeInsets.zero,
+                title: Center(
+                  child: state.suggests.isEmpty
+                      ? Text(
+                          "对话",
+                          style: TextStyle(
+                            // 上下居中
+                            fontSize: CustomSize.appBarTitleSize,
+                            color: customColors.backgroundInvertedColor,
+                          ),
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(top: 10, left: 10),
+                              child: Text(
+                                '热门推荐',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: customColors.backgroundInvertedColor,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(
+                                  top: 0, left: 10, bottom: 10),
+                              child: Text(
+                                '挑选你的专属伙伴',
+                                style: TextStyle(
+                                  color: customColors.weakTextColorPlus,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 10, left: 10),
-                            child: Text(
-                              '热门推荐',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                color: customColors.backgroundInvertedColor,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(
-                                top: 0, left: 10, bottom: 10),
-                            child: Text(
-                              '挑选你的专属伙伴',
-                              style: TextStyle(
-                                color: customColors.weakTextColorPlus,
-                                fontSize: 11,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                ),
                 // backgroundImage: Image.asset(
                 //   customColors.appBarBackgroundImageForRoom!,
                 //   fit: BoxFit.cover,

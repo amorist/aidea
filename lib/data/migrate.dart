@@ -114,6 +114,10 @@ Future<void> migrate(db, oldVersion, newVersion) async {
     await db.execute(
         'ALTER TABLE chat_message ADD COLUMN status INTEGER DEFAULT 1;');
   }
+
+  if (oldVersion <= 26) {
+    await db.execute('ALTER TABLE chat_message ADD COLUMN image TEXT NULL;');
+  }
 }
 
 /// 数据库初始化
@@ -152,6 +156,7 @@ void initDatabase(db, version) async {
           role TEXT NOT NULL,
           user TEXT,
           text TEXT,
+          image TEXT NULL,
           extra TEXT,
           ref_id INTEGER NULL,
           server_id INTEGER NULL,

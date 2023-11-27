@@ -139,6 +139,6 @@ class Ability {
 
   /// 是否支持七牛云图片上传功能
   bool supportQiniuUploader() {
-    return setting.stringDefault(settingAPIServerToken, '') != '';
+    return true;
   }
 }

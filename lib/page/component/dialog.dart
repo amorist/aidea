@@ -22,7 +22,7 @@ showErrorMessageEnhanced(
 }) {
   if (message is LanguageText) {
     switch (message.action) {
-      // 智慧果不足，支付页面
+      // 脑力不足，支付页面
       case 'payment':
         showBeautyDialog(
           context,

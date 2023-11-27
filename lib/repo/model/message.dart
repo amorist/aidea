@@ -61,6 +61,9 @@ class Message {
   /// 消息发送者的名称，不需要持久化
   String? senderName;
 
+  /// 图片
+  String? image;
+
   Message(
     this.role,
     this.text, {
@@ -80,6 +83,7 @@ class Message {
     this.tokenConsumed,
     this.avatarUrl,
     this.senderName,
+    this.image,
   });
 
   /// 获取消息附加信息
@@ -140,6 +144,7 @@ class Message {
       'chat_history_id': chatHistoryId,
       'role': role.getRoleText(),
       'text': text,
+      'image': image,
       'type': type.getTypeText(),
       'extra': extra,
       'model': model,
@@ -160,6 +165,7 @@ class Message {
         chatHistoryId = map['chat_history_id'] as int?,
         role = Role.getRoleFromText(map['role'] as String),
         text = map['text'] as String,
+        image = map['image'] as String?,
         extra = map['extra'] as String?,
         model = map['model'] as String?,
         type = MessageType.getTypeFromText(map['type'] as String),

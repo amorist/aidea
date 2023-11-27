@@ -33,54 +33,54 @@ class RoomItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(customColors.borderRadius ?? 8),
       ),
       child: Slidable(
-        endActionPane: ActionPane(
-          motion: const ScrollMotion(),
-          children: [
-            const SizedBox(width: 10),
-            SlidableAction(
-              label: '设置',
-              backgroundColor: Colors.green,
-              borderRadius: room.category == 'system'
-                  ? BorderRadius.all(
-                      Radius.circular(customColors.borderRadius ?? 8))
-                  : BorderRadius.only(
-                      topLeft: Radius.circular(customColors.borderRadius ?? 8),
-                      bottomLeft:
-                          Radius.circular(customColors.borderRadius ?? 8),
-                    ),
-              icon: Icons.settings,
-              onPressed: (_) {
-                final chatRoomBloc = context.read<RoomBloc>();
-                final redirectUrl = room.roomType == 4
-                    ? '/group-chat/${room.id}/edit'
-                    : '/room/${room.id}/setting';
+        // endActionPane: ActionPane(
+        //   motion: const ScrollMotion(),
+        //   children: [
+        //     const SizedBox(width: 10),
+        //     SlidableAction(
+        //       label: '设置',
+        //       backgroundColor: Colors.green,
+        //       borderRadius: room.category == 'system'
+        //           ? BorderRadius.all(
+        //               Radius.circular(customColors.borderRadius ?? 8))
+        //           : BorderRadius.only(
+        //               topLeft: Radius.circular(customColors.borderRadius ?? 8),
+        //               bottomLeft:
+        //                   Radius.circular(customColors.borderRadius ?? 8),
+        //             ),
+        //       icon: Icons.settings,
+        //       onPressed: (_) {
+        //         final chatRoomBloc = context.read<RoomBloc>();
+        //         final redirectUrl = room.roomType == 4
+        //             ? '/group-chat/${room.id}/edit'
+        //             : '/room/${room.id}/setting';
 
-                context.push(redirectUrl).then((value) {
-                  chatRoomBloc.add(RoomsLoadEvent());
-                });
-              },
-            ),
-            if (room.category != 'system')
-              SlidableAction(
-                label: AppLocale.delete.getString(context),
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(customColors.borderRadius ?? 8),
-                  bottomRight: Radius.circular(customColors.borderRadius ?? 8),
-                ),
-                backgroundColor: Colors.red,
-                icon: Icons.delete,
-                onPressed: (_) {
-                  openConfirmDialog(
-                    context,
-                    AppLocale.confirmToDeleteRoom.getString(context),
-                    () =>
-                        context.read<RoomBloc>().add(RoomDeleteEvent(room.id!)),
-                    danger: true,
-                  );
-                },
-              ),
-          ],
-        ),
+        //         context.push(redirectUrl).then((value) {
+        //           chatRoomBloc.add(RoomsLoadEvent());
+        //         });
+        //       },
+        //     ),
+        //     if (room.category != 'system')
+        //       SlidableAction(
+        //         label: AppLocale.delete.getString(context),
+        //         borderRadius: BorderRadius.only(
+        //           topRight: Radius.circular(customColors.borderRadius ?? 8),
+        //           bottomRight: Radius.circular(customColors.borderRadius ?? 8),
+        //         ),
+        //         backgroundColor: Colors.red,
+        //         icon: Icons.delete,
+        //         onPressed: (_) {
+        //           openConfirmDialog(
+        //             context,
+        //             AppLocale.confirmToDeleteRoom.getString(context),
+        //             () =>
+        //                 context.read<RoomBloc>().add(RoomDeleteEvent(room.id!)),
+        //             danger: true,
+        //           );
+        //         },
+        //       ),
+        //   ],
+        // ),
         child: Material(
           borderRadius:
               BorderRadius.all(Radius.circular(customColors.borderRadius ?? 8)),

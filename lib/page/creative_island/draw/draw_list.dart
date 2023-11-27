@@ -60,12 +60,14 @@ class _DrawListScreenState extends State<DrawListScreen> {
   ) {
     return SliverComponent(
       centerTitle: true,
-      titlePadding: const EdgeInsets.only(bottom: 10),
-      title: Text(
-        AppLocale.creativeIsland.getString(context),
-        style: TextStyle(
-          fontSize: CustomSize.appBarTitleSize,
-          color: customColors.backgroundInvertedColor,
+      titlePadding: EdgeInsets.zero,
+      title: Center(
+        child: Text(
+          AppLocale.creativeIsland.getString(context),
+          style: TextStyle(
+            fontSize: CustomSize.appBarTitleSize,
+            color: customColors.backgroundInvertedColor,
+          ),
         ),
       ),
       actions: [

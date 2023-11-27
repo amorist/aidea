@@ -51,7 +51,7 @@ class ChatInput extends StatefulWidget {
 class _ChatInputState extends State<ChatInput> {
   final TextEditingController _textController = TextEditingController();
 
-  bool _isVoice = true;
+  bool _isVoice = false;
 
   void toggleVoiceInput() {
     setState(() {
@@ -384,8 +384,7 @@ class _ChatInputState extends State<ChatInput> {
                     // 聊天功能按钮
                     Row(
                       children: [
-                        if (widget.enableImageUpload &&
-                            Ability().supportImageUploader())
+                        if (!_isVoice)
                           _buildImageUploadButton(
                               context, setting, customColors),
                         if (widget.leftSideToolsBuilder != null)
@@ -474,17 +473,29 @@ class _ChatInputState extends State<ChatInput> {
               ),
             );
           });
-
-          var upload = ImageUploader(setting).upload(result.files.single.path!);
-
-          upload.then((value) {
-            _handleSubmited(
-              '![${value.name}](${value.url})',
-              notSend: true,
-            );
-          }).onError((error, stackTrace) {
-            showErrorMessageEnhanced(context, error!);
-          }).whenComplete(() => cancel());
+          if (PlatformTool.isWeb()) {
+            final fileBytes = result.files.first.bytes;
+            var upload = ImageUploader(setting).uploadData(fileBytes!);
+            upload.then((value) {
+              _handleSubmited(
+                '![${value.name}](${value.url})',
+                notSend: true,
+              );
+            }).onError((error, stackTrace) {
+              showErrorMessageEnhanced(context, error!);
+            }).whenComplete(() => cancel());
+          } else {
+            var upload =
+                ImageUploader(setting).upload(result.files.single.path!);
+            upload.then((value) {
+              _handleSubmited(
+                '![${value.name}](${value.url})',
+                notSend: true,
+              );
+            }).onError((error, stackTrace) {
+              showErrorMessageEnhanced(context, error!);
+            }).whenComplete(() => cancel());
+          }
         }
       },
       icon: const Icon(Icons.camera_alt),

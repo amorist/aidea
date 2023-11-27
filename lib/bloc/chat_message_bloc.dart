@@ -343,6 +343,7 @@ class ChatMessageBloc extends BlocExt<ChatMessageEvent, ChatMessageState> {
 
               final quotaConsumed = cmd['quota_consumed'] ?? 0;
               final tokenConsumed = cmd['token'] ?? 0;
+              final image = cmd['image'] ?? '';
 
               final info = cmd['info'] ?? '';
               if (info != '') {
@@ -355,6 +356,7 @@ class ChatMessageBloc extends BlocExt<ChatMessageEvent, ChatMessageState> {
 
               waitMessage.quotaConsumed = quotaConsumed;
               waitMessage.tokenConsumed = tokenConsumed;
+              waitMessage.image = image;
             } catch (e) {
               // ignore: avoid_print
             }

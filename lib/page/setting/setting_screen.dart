@@ -60,18 +60,20 @@ class _SettingScreenState extends State<SettingScreen> {
         backgroundColor: Colors.transparent,
         body: SliverComponent(
           centerTitle: true,
-          titlePadding: const EdgeInsets.only(bottom: 10),
-          title: Text(
-            AppLocale.me.getString(context),
-            style: TextStyle(
-              fontSize: CustomSize.appBarTitleSize,
-              color: customColors.backgroundInvertedColor,
+          titlePadding: EdgeInsets.zero,
+          title: Center(
+            child: Text(
+              AppLocale.me.getString(context),
+              style: TextStyle(
+                fontSize: CustomSize.appBarTitleSize,
+                color: customColors.backgroundInvertedColor,
+              ),
             ),
           ),
           child: BlocBuilder<AccountBloc, AccountState>(
             builder: (_, state) {
               return buildSettingsList([
-                // 智慧果信息、充值入口
+                // 脑力信息、充值入口
                 if (state is AccountLoaded && state.user != null)
                   _buildAccountQuotaCard(context, state),
 
@@ -82,8 +84,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
 
                 // 邀请卡片
-                if (state is AccountLoaded && state.user != null)
-                  _buildInviteCard(context, state),
+                // if (state is AccountLoaded && state.user != null)
+                //   _buildInviteCard(context, state),
 
                 // 自定义设置
                 SettingsSection(
@@ -94,8 +96,8 @@ class _SettingScreenState extends State<SettingScreen> {
                     // 语言设置
                     _buildCommonLanguageSetting(),
                     // 常用模型
-                    if (Ability().enableAPIServer())
-                      _buildCustomHomeModelsSetting(customColors),
+                    // if (Ability().enableAPIServer())
+                    //   _buildCustomHomeModelsSetting(customColors),
                     // OpenAI 自定义配置
                     // if (Ability().enableOpenAI)
                     //   _buildOpenAISelfHostedSetting(customColors),
@@ -226,52 +228,52 @@ class _SettingScreenState extends State<SettingScreen> {
                   ],
                 ),
 
-                if (state is AccountLoaded &&
-                    state.error == null &&
-                    state.user != null &&
-                    state.user!.control.withLab)
-                  SettingsSection(
-                    title: const Text('实验室'),
-                    tiles: [
-                      SettingsTile(
-                        title: const Text('模型 Gallery'),
-                        trailing: Icon(
-                          CupertinoIcons.chevron_forward,
-                          size: MediaQuery.of(context).textScaleFactor * 18,
-                          color: Colors.grey,
-                        ),
-                        onPressed: (context) {
-                          context.push('/creative-island/models');
-                        },
-                      ),
-                      SettingsTile(
-                        title: const Text('画板'),
-                        trailing: Icon(
-                          CupertinoIcons.chevron_forward,
-                          size: MediaQuery.of(context).textScaleFactor * 18,
-                          color: Colors.grey,
-                        ),
-                        onPressed: (context) {
-                          context.push('/lab/draw-board');
-                        },
-                      ),
+                // if (state is AccountLoaded &&
+                //     state.error == null &&
+                //     state.user != null &&
+                //     state.user!.control.withLab)
+                //   SettingsSection(
+                //     title: const Text('实验室'),
+                //     tiles: [
+                //       SettingsTile(
+                //         title: const Text('模型 Gallery'),
+                //         trailing: Icon(
+                //           CupertinoIcons.chevron_forward,
+                //           size: MediaQuery.of(context).textScaleFactor * 18,
+                //           color: Colors.grey,
+                //         ),
+                //         onPressed: (context) {
+                //           context.push('/creative-island/models');
+                //         },
+                //       ),
+                //       SettingsTile(
+                //         title: const Text('画板'),
+                //         trailing: Icon(
+                //           CupertinoIcons.chevron_forward,
+                //           size: MediaQuery.of(context).textScaleFactor * 18,
+                //           color: Colors.grey,
+                //         ),
+                //         onPressed: (context) {
+                //           context.push('/lab/draw-board');
+                //         },
+                //       ),
 
-                      // SettingsTile(
-                      //   title: const Text('用户中心'),
-                      //   trailing: Icon(
-                      //     CupertinoIcons.chevron_forward,
-                      //     size: MediaQuery.of(context).textScaleFactor * 18,
-                      //     color: Colors.grey,
-                      //   ),
-                      //   onPressed: (context) {
-                      //     context.push('/lab/user-center');
-                      //   },
-                      // ),
+                //       SettingsTile(
+                //         title: const Text('用户中心'),
+                //         trailing: Icon(
+                //           CupertinoIcons.chevron_forward,
+                //           size: MediaQuery.of(context).textScaleFactor * 18,
+                //           color: Colors.grey,
+                //         ),
+                //         onPressed: (context) {
+                //           context.push('/lab/user-center');
+                //         },
+                //       ),
 
-                      // 自定义服务器
-                      _buildServerSelfHostedSetting(customColors),
-                    ],
-                  ),
+                //       // 自定义服务器
+                //       // _buildServerSelfHostedSetting(customColors),
+                //     ],
+                //   ),
                 // 社交媒体图标
                 // _buildSocialIcons(context),
               ]);
@@ -442,17 +444,17 @@ class _SettingScreenState extends State<SettingScreen> {
             context.push('/setting/account-security');
           },
         ),
-        SettingsTile(
-          title: const Text('免费畅享额度'),
-          trailing: Icon(
-            CupertinoIcons.chevron_forward,
-            size: MediaQuery.of(context).textScaleFactor * 18,
-            color: Colors.grey,
-          ),
-          onPressed: (context) {
-            context.push('/free-statistics');
-          },
-        ),
+        // SettingsTile(
+        //   title: const Text('免费畅享额度'),
+        //   trailing: Icon(
+        //     CupertinoIcons.chevron_forward,
+        //     size: MediaQuery.of(context).textScaleFactor * 18,
+        //     color: Colors.grey,
+        //   ),
+        //   onPressed: (context) {
+        //     context.push('/free-statistics');
+        //   },
+        // ),
       ];
     } else if (state is AccountLoading) {
       return [
@@ -483,7 +485,7 @@ class _SettingScreenState extends State<SettingScreen> {
       title: Text(AppLocale.themeMode.getString(context)),
       onPressed: (context) {
         final current =
-            widget.settings.stringDefault(settingThemeMode, 'system');
+            widget.settings.stringDefault(settingThemeMode, 'light');
 
         openModalBottomSheet(
           context,

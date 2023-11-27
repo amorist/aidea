@@ -131,7 +131,7 @@ void main() async {
         }
       },
       onCreate: initDatabase,
-      onOpen: (db) {
+      onOpen: (db) async {
         Logger.instance.i('数据库存储路径：${db.path}');
       },
     ),
@@ -929,7 +929,7 @@ class _MyAppState extends State<MyApp> {
       child: ChangeNotifierProvider(
           create: (context) => AppTheme.instance
             ..mode = AppTheme.themeModeFormString(
-                widget.settingRepo.stringDefault(settingThemeMode, 'system')),
+                widget.settingRepo.stringDefault(settingThemeMode, 'light')),
           builder: (context, _) {
             final appTheme = context.watch<AppTheme>();
             return Sizer(
