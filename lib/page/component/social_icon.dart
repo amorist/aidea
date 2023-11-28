@@ -39,36 +39,36 @@ class SocialIconGroup extends StatelessWidget {
         );
       },
     ),
-    SocialItem(
-      image: 'assets/x.png',
-      name: 'Twitter(X)',
-      onTap: () {
-        launchUrlString(
-          'https://twitter.com/mylxsw',
-          mode: LaunchMode.externalApplication,
-        );
-      },
-    ),
+    // SocialItem(
+    //   image: 'assets/x.png',
+    //   name: 'Twitter(X)',
+    //   onTap: () {
+    //     launchUrlString(
+    //       'https://twitter.com/amor90s',
+    //       mode: LaunchMode.externalApplication,
+    //     );
+    //   },
+    // ),
     SocialItem(
       image: 'assets/github.png',
       name: 'Github',
       onTap: () {
         launchUrlString(
-          'http://github.com/mylxsw/aidea',
+          'http://github.com/amorist',
           mode: LaunchMode.externalApplication,
         );
       },
     ),
-    SocialItem(
-      image: 'assets/xiaohongshu.png',
-      name: '小红书',
-      onTap: () {
-        launchUrlString(
-          'https://www.xiaohongshu.com/user/profile/63c65968000000002702abcd?xhsshare=CopyLink&appuid=63c65968000000002702abcd&apptime=1696648278',
-          mode: LaunchMode.externalApplication,
-        );
-      },
-    ),
+    // SocialItem(
+    //   image: 'assets/xiaohongshu.png',
+    //   name: '小红书',
+    //   onTap: () {
+    //     launchUrlString(
+    //       'https://www.xiaohongshu.com/user/profile/63c65968000000002702abcd?xhsshare=CopyLink&appuid=63c65968000000002702abcd&apptime=1696648278',
+    //       mode: LaunchMode.externalApplication,
+    //     );
+    //   },
+    // ),
   ];
 
   SocialIconGroup({

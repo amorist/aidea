@@ -15,7 +15,7 @@ import 'package:askaide/page/component/background_container.dart';
 import 'package:askaide/page/component/invite_card.dart';
 import 'package:askaide/page/component/item_selector_search.dart';
 import 'package:askaide/page/component/sliver_component.dart';
-// import 'package:askaide/page/component/social_icon.dart';
+import 'package:askaide/page/component/social_icon.dart';
 import 'package:askaide/page/component/theme/custom_size.dart';
 import 'package:askaide/page/component/theme/custom_theme.dart';
 import 'package:askaide/page/component/theme/theme.dart';
@@ -178,31 +178,31 @@ class _SettingScreenState extends State<SettingScreen> {
                         },
                       ),
                     // 用户协议
-                    SettingsTile(
-                      title: Text(AppLocale.userTerms.getString(context)),
-                      trailing: Icon(
-                        CupertinoIcons.chevron_forward,
-                        size: MediaQuery.of(context).textScaleFactor * 18,
-                        color: Colors.grey,
-                      ),
-                      onPressed: (_) {
-                        launchUrl(
-                            Uri.parse('https://ai.aicode.cc/terms-user.html'));
-                      },
-                    ),
+                    // SettingsTile(
+                    //   title: Text(AppLocale.userTerms.getString(context)),
+                    //   trailing: Icon(
+                    //     CupertinoIcons.chevron_forward,
+                    //     size: MediaQuery.of(context).textScaleFactor * 18,
+                    //     color: Colors.grey,
+                    //   ),
+                    //   onPressed: (_) {
+                    //     launchUrl(
+                    //         Uri.parse('https://ai.aicode.cc/terms-user.html'));
+                    //   },
+                    // ),
                     // 隐私政策
-                    SettingsTile(
-                      title: Text(AppLocale.privacyPolicy.getString(context)),
-                      trailing: Icon(
-                        CupertinoIcons.chevron_forward,
-                        size: MediaQuery.of(context).textScaleFactor * 18,
-                        color: Colors.grey,
-                      ),
-                      onPressed: (_) {
-                        launchUrl(Uri.parse(
-                            'https://ai.aicode.cc/privacy-policy.html'));
-                      },
-                    ),
+                    // SettingsTile(
+                    //   title: Text(AppLocale.privacyPolicy.getString(context)),
+                    //   trailing: Icon(
+                    //     CupertinoIcons.chevron_forward,
+                    //     size: MediaQuery.of(context).textScaleFactor * 18,
+                    //     color: Colors.grey,
+                    //   ),
+                    //   onPressed: (_) {
+                    //     launchUrl(Uri.parse(
+                    //         'https://ai.aicode.cc/privacy-policy.html'));
+                    //   },
+                    // ),
 
                     // 关于
                     // SettingsTile(
@@ -275,7 +275,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 //     ],
                 //   ),
                 // 社交媒体图标
-                // _buildSocialIcons(context),
+                _buildSocialIcons(context),
               ]);
             },
           ),
@@ -629,11 +629,11 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  // CustomSettingsSection _buildSocialIcons(BuildContext context) {
-  //   return CustomSettingsSection(
-  //     child: SocialIconGroup(
-  //       isSettingTiles: true,
-  //     ),
-  //   );
-  // }
+  CustomSettingsSection _buildSocialIcons(BuildContext context) {
+    return CustomSettingsSection(
+      child: SocialIconGroup(
+        isSettingTiles: true,
+      ),
+    );
+  }
 }
