@@ -962,9 +962,9 @@ class _MyAppState extends State<MyApp> {
 }
 
 ThemeData createLightThemeData() {
-  return ThemeData.light().copyWith(
+  return ThemeData.light(useMaterial3: true).copyWith(
+    textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Roboto'),
     extensions: [CustomColors.light],
-    useMaterial3: true,
     appBarTheme: const AppBarTheme(
       // backgroundColor: Color.fromARGB(255, 250, 250, 250),
       backgroundColor: Colors.white,
@@ -995,9 +995,9 @@ ThemeData createLightThemeData() {
 }
 
 ThemeData createDarkThemeData() {
-  return ThemeData.dark().copyWith(
+  return ThemeData.dark(useMaterial3: true).copyWith(
+    textTheme: ThemeData.dark().textTheme.apply(fontFamily: 'Roboto'),
     extensions: [CustomColors.dark],
-    useMaterial3: true,
     appBarTheme: const AppBarTheme(
       // backgroundColor: Color.fromARGB(255, 48, 48, 48),
       backgroundColor: Colors.transparent,

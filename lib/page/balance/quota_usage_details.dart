@@ -113,7 +113,7 @@ class _QuotaUsageDetailScreenState extends State<QuotaUsageDetailScreen> {
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(width: 20),
                       Expanded(
-                        child: Text('使用 ${item.type} 消耗 ${item.used} 个脑力'),
+                        child: Text('使用 ${item.type} 消耗 ${item.used} 个灵感'),
                       ),
                     ],
                   ),

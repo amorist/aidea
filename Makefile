@@ -4,7 +4,7 @@ ipa:
 	open build/ios/ipa
 
 run:
-	flutter run --release 
+	flutter run --release --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://resources.aicode.cc/canvaskit/
 
 build-all: build-android ipa
 
@@ -20,6 +20,7 @@ build-macos:
 
 build-web:
 	flutter build web --web-renderer canvaskit --release --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://resources.aicode.cc/canvaskit/
+	flutter build web --web-renderer html
 	cd scripts && go run main.go ../build/web/main.dart.js && cd ..
 	rm -fr build/web/fonts/ && mkdir build/web/fonts
 	cp -r scripts/s build/web/fonts/s

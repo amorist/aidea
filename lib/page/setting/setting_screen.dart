@@ -73,7 +73,7 @@ class _SettingScreenState extends State<SettingScreen> {
           child: BlocBuilder<AccountBloc, AccountState>(
             builder: (_, state) {
               return buildSettingsList([
-                // 脑力信息、充值入口
+                // 灵感信息、充值入口
                 if (state is AccountLoaded && state.user != null)
                   _buildAccountQuotaCard(context, state),
 
@@ -145,38 +145,38 @@ class _SettingScreenState extends State<SettingScreen> {
                     //   },
                     // ),
                     // 检查更新
-                    if (!PlatformTool.isIOS())
-                      SettingsTile(
-                        title: Text(AppLocale.updateCheck.getString(context)),
-                        trailing: Icon(
-                          CupertinoIcons.chevron_forward,
-                          size: MediaQuery.of(context).textScaleFactor * 18,
-                          color: Colors.grey,
-                        ),
-                        onPressed: (_) {
-                          APIServer().versionCheck(cache: false).then((resp) {
-                            if (resp.hasUpdate) {
-                              showBeautyDialog(
-                                context,
-                                type: QuickAlertType.success,
-                                text: resp.message,
-                                confirmBtnText: '去更新',
-                                onConfirmBtnTap: () {
-                                  launchUrlString(
-                                    resp.url,
-                                    mode: LaunchMode.externalApplication,
-                                  );
-                                },
-                                cancelBtnText: '暂不更新',
-                                showCancelBtn: true,
-                              );
-                            } else {
-                              showSuccessMessage(
-                                  AppLocale.latestVersion.getString(context));
-                            }
-                          });
-                        },
-                      ),
+                    // if (!PlatformTool.isIOS())
+                    //   SettingsTile(
+                    //     title: Text(AppLocale.updateCheck.getString(context)),
+                    //     trailing: Icon(
+                    //       CupertinoIcons.chevron_forward,
+                    //       size: MediaQuery.of(context).textScaleFactor * 18,
+                    //       color: Colors.grey,
+                    //     ),
+                    //     onPressed: (_) {
+                    //       APIServer().versionCheck(cache: false).then((resp) {
+                    //         if (resp.hasUpdate) {
+                    //           showBeautyDialog(
+                    //             context,
+                    //             type: QuickAlertType.success,
+                    //             text: resp.message,
+                    //             confirmBtnText: '去更新',
+                    //             onConfirmBtnTap: () {
+                    //               launchUrlString(
+                    //                 resp.url,
+                    //                 mode: LaunchMode.externalApplication,
+                    //               );
+                    //             },
+                    //             cancelBtnText: '暂不更新',
+                    //             showCancelBtn: true,
+                    //           );
+                    //         } else {
+                    //           showSuccessMessage(
+                    //               AppLocale.latestVersion.getString(context));
+                    //         }
+                    //       });
+                    //     },
+                    //   ),
                     // 用户协议
                     // SettingsTile(
                     //   title: Text(AppLocale.userTerms.getString(context)),

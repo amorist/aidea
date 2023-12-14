@@ -19,26 +19,26 @@ class SocialIconGroup extends StatelessWidget {
   final bool isSettingTiles;
 
   final List<SocialItem> items = [
-    SocialItem(
-      image: 'assets/weibo.png',
-      name: '官方微博',
-      onTap: () {
-        launchUrlString(
-          'https://weibo.com/code404',
-          mode: LaunchMode.externalApplication,
-        );
-      },
-    ),
-    SocialItem(
-      image: 'assets/wechat.png',
-      name: '微信公众号',
-      onTap: () {
-        launchUrlString(
-          'https://mp.weixin.qq.com/s/4CHh_rKxBqi-npDEnmLWmA',
-          mode: LaunchMode.externalApplication,
-        );
-      },
-    ),
+    // SocialItem(
+    //   image: 'assets/weibo.png',
+    //   name: '官方微博',
+    //   onTap: () {
+    //     launchUrlString(
+    //       'https://weibo.com/code404',
+    //       mode: LaunchMode.externalApplication,
+    //     );
+    //   },
+    // ),
+    // SocialItem(
+    //   image: 'assets/wechat.png',
+    //   name: '微信公众号',
+    //   onTap: () {
+    //     launchUrlString(
+    //       'https://mp.weixin.qq.com/s/4CHh_rKxBqi-npDEnmLWmA',
+    //       mode: LaunchMode.externalApplication,
+    //     );
+    //   },
+    // ),
     // SocialItem(
     //   image: 'assets/x.png',
     //   name: 'Twitter(X)',

@@ -32,12 +32,32 @@ class ChatsPage extends StatefulWidget {
 class _ChatsPageState extends State<ChatsPage> {
   @override
   void initState() {
-    context.read<RoomBloc>().add(RoomsLoadEvent());
+    if (Ability().enableAPIServer()) {
+      userSignedIn = true;
+    }
+    if (userSignedIn) {
+      context.read<RoomBloc>().add(RoomsLoadEvent());
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!userSignedIn) {
+        context.push('/login').whenComplete(() {
+          context.read<RoomBloc>().add(RoomsLoadEvent());
+        });
+      }
+    });
 
     super.initState();
   }
 
+  bool userSignedIn = false;
+
   List<RoomGallery> selectedSuggestions = [];
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

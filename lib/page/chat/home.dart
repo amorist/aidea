@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> {
           context,
           type: QuickAlertType.info,
           text:
-              '恭喜您，账号创建成功！${(widget.reward != null && widget.reward! > 0) ? '\n\n为了庆祝这一时刻，我们向您的账户赠送了 ${widget.reward} 个脑力。' : ''}',
+              '恭喜您，账号创建成功！${(widget.reward != null && widget.reward! > 0) ? '\n\n为了庆祝这一时刻，我们向您的账户赠送了 ${widget.reward} 个灵感。' : ''}',
           confirmBtnText: '开始使用',
           onConfirmBtnTap: () {
             context.pop();

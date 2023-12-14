@@ -1356,7 +1356,7 @@ class APIServer {
     );
   }
 
-  /// 获取用户脑力消耗历史记录
+  /// 获取用户灵感消耗历史记录
   Future<List<QuotaUsageInDay>> quotaUsedStatistics({bool cache = true}) async {
     return sendCachedGetRequest(
       '/v1/users/quota/usage-stat',
@@ -1374,7 +1374,7 @@ class APIServer {
     );
   }
 
-  /// 获取用户脑力消耗历史记录详情
+  /// 获取用户灵感消耗历史记录详情
   Future<List<QuotaUsageDetailInDay>> quotaUsedDetails(
       {required String date}) async {
     return sendGetRequest(

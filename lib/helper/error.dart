@@ -19,6 +19,9 @@ Object resolveErrorMessage(dynamic e, {bool isChat = false}) {
 
 Object? resolveHTTPStatusCode(int statusCode,
     {bool isChat = false, String? message}) {
+  print('resolveHTTPStatusCode: $statusCode' +
+      (message ?? '') +
+      (isChat ? 'isChat' : ''));
   switch (statusCode) {
     case 400:
       return const LanguageText('请求参数错误');

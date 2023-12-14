@@ -389,7 +389,7 @@ class _ChatPreviewState extends State<ChatPreview> {
                                       //       const SizedBox(width: 5),
                                       //       Expanded(
                                       //         child: Text(
-                                      //           '共 ${message.tokenConsumed} 个 Token， 消耗 ${message.quotaConsumed} 个脑力',
+                                      //           '共 ${message.tokenConsumed} 个 Token， 消耗 ${message.quotaConsumed} 个灵感',
                                       //           style: TextStyle(
                                       //             fontSize: 14,
                                       //             color: customColors
